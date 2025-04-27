@@ -281,6 +281,17 @@ function App() {
                         setSelectedCode(savedCode);
                         searchSchedule(savedCode);
                       }}
+                      onTouchStart={(e) => {
+                        const timeout = setTimeout(() => {
+                          const updatedCodes = savedCodes.filter((code) => code !== savedCode);
+                          localStorage.setItem("savedCodes", JSON.stringify(updatedCodes));
+                          setSavedCodes(updatedCodes);
+                          alert("Código apagado com sucesso!");
+                        }, 600);
+
+                        e.currentTarget.ontouchend = () => clearTimeout(timeout);
+                        e.currentTarget.ontouchcancel = () => clearTimeout(timeout);
+                      }}
                       onMouseDown={(e) => {
                         const timeout = setTimeout(() => {
                           const updatedCodes = savedCodes.filter((code) => code !== savedCode);
@@ -292,6 +303,7 @@ function App() {
                         e.currentTarget.onmouseup = () => clearTimeout(timeout);
                         e.currentTarget.onmouseleave = () => clearTimeout(timeout);
                       }}
+
                       className="bg-gray-300 px-3 py-1 rounded-lg text-sm text-gray-700 hover:bg-gray-400 transition cursor-pointer"
                     >
                       {savedCode}
