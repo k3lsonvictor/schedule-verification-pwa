@@ -227,22 +227,36 @@ function App() {
                 value={codeInput}
               />
             </div>
-            <button
-              className="w-full bg-blue-800 text-white py-2 rounded-md hover:bg-blue-900 transition cursor-pointer"
-              onClick={() => {
-                searchSchedule(codeInput);
-              }}
-            >
-              Buscar
-            </button>
+            <div className="flex gap-2">
+              <button
+                className="flex-1 bg-blue-800 text-white py-2 rounded-md hover:bg-blue-900 transition cursor-pointer"
+                onClick={() => {
+                  searchSchedule(codeInput);
+                }}
+              >
+                Buscar
+              </button>
+              {htmlResult && (
+                <button
+                  className="flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition cursor-pointer"
+                  onClick={() => {
+                    setHtmlResult("");
+                    setSelectedCode("");
+                  }}
+                >
+                  Limpar Busca
+                </button>
+              )}
+            </div>
             <button
               className="w-full bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition cursor-pointer mt-2"
               onClick={() => {
                 if (codeInput.trim()) {
-                  const savedCodes = JSON.parse(localStorage.getItem("savedCodes") || "[]");
-                  if (!savedCodes.includes(codeInput.trim())) {
-                    savedCodes.push(codeInput.trim());
-                    localStorage.setItem("savedCodes", JSON.stringify(savedCodes));
+                  const storedCodes = JSON.parse(localStorage.getItem("savedCodes") || "[]");
+                  if (!storedCodes.includes(codeInput.trim())) {
+                    const updatedCodes = [...storedCodes, codeInput.trim()];
+                    localStorage.setItem("savedCodes", JSON.stringify(updatedCodes));
+                    setSavedCodes(updatedCodes); // Atualiza o estado para renderizar os códigos salvos
                     alert("Código salvo com sucesso!");
                   } else {
                     alert("Este código já está salvo.");
@@ -265,13 +279,23 @@ function App() {
                       key={index}
                       onClick={() => {
                         setSelectedCode(savedCode);
-                        searchSchedule(savedCode)
+                        searchSchedule(savedCode);
+                      }}
+                      onMouseDown={(e) => {
+                        const timeout = setTimeout(() => {
+                          const updatedCodes = savedCodes.filter((code) => code !== savedCode);
+                          localStorage.setItem("savedCodes", JSON.stringify(updatedCodes));
+                          setSavedCodes(updatedCodes);
+                          alert("Código apagado com sucesso!");
+                        }, 600);
+
+                        e.currentTarget.onmouseup = () => clearTimeout(timeout);
+                        e.currentTarget.onmouseleave = () => clearTimeout(timeout);
                       }}
                       className="bg-gray-300 px-3 py-1 rounded-lg text-sm text-gray-700 hover:bg-gray-400 transition cursor-pointer"
                     >
                       {savedCode}
                     </button>
-
                   ))}
                 </div>
               </div>
