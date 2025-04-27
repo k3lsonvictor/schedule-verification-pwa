@@ -13,8 +13,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt'],
       manifest: {
-        name: 'Meu PWA Simples',
-        short_name: 'MeuPWA',
+        name: 'Fms Agendamentos',
+        short_name: 'Fms Agendamentos',
         description: 'Um Progressive Web App simples com Vite + React',
         theme_color: '#ffffff',
         icons: [
