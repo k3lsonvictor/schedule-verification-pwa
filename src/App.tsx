@@ -67,7 +67,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [codeInput, setCodeInput] = useState("");
   const [codes, setCodes] = useState<string[]>([]);
-  const [currentScreen, setCurrentScreen] = useState<"register" | "search">("register");
+  const [currentScreen, setCurrentScreen] = useState<"register" | "search">("search");
   const [htmlResult, setHtmlResult] = useState<string>("");
   const [savedCodes, setSavedCodes] = useState<string[]>([]);
   const [selectedCode, setSelectedCode] = useState<string>("");
