@@ -111,6 +111,36 @@ function App() {
     return html;
   }
 
+  const emailsRegister = async () => {
+    if (!email || !codes.length) {
+      alert("Por favor, preencha o email e adicione pelo menos um código.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://159.89.40.124:8080/users/register", {
+        email,
+        codes: [
+          ...codes.map((code) => {
+            return {
+              value: code,
+            }
+          })
+        ]
+      });
+      if (response.status === 200) {
+        alert("Email cadastrado com sucesso!");
+        setEmail("");
+        setCodes([]);
+      } else {
+        alert("Erro ao cadastrar email.");
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar email:", error);
+      alert("Erro ao cadastrar email.");
+    }
+  }
+
   return (
     <div className="">
       <div className='flex gap-4 mb-4'>
@@ -196,7 +226,9 @@ function App() {
               </div>
             </div>
             {/* Botão Agendar */}
-            <button className="w-full bg-blue-800 text-white py-2 rounded-md hover:bg-blue-900 transition cursor-pointer">
+            <button
+              onClick={emailsRegister}
+              className="w-full bg-blue-800 text-white py-2 rounded-md hover:bg-blue-900 transition cursor-pointer">
               Cadastrar
             </button>
           </div>
