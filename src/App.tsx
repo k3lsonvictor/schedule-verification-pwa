@@ -355,6 +355,12 @@ function App() {
         </div>
       )}
 
+      <footer className="mt-8 bg-gray-100 text-center py-4 border-t border-gray-300">
+        <p className="text-sm text-gray-600">
+          Desenvolvido por <a href="https://github.com/k3lsonvictor" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Kelson Victor</a>
+        </p>
+      </footer>
+
     </div>
   );
 }
