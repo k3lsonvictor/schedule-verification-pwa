@@ -118,7 +118,7 @@ function App() {
     }
 
     try {
-      const response = await axios.post("http://verificacao-de-agendamento-e3lce.ondigitalocean.app/users/register", {
+      const response = await axios.post("http://159.89.40.124:8080/users/register", {
         email,
         codes: [
           ...codes.map((code) => {
