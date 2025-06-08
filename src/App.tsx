@@ -118,7 +118,7 @@ function App() {
     }
 
     try {
-      const response = await axios.post("http://159.89.40.124:8080/users/register", {
+      const response = await axios.post("https://fms-pi-agendamento.live/users/test/users/register", {
         email,
         codes: [
           ...codes.map((code) => {
