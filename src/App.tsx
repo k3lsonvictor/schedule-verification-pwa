@@ -118,7 +118,7 @@ function App() {
     }
 
     try {
-      const response = await axios.post("https://fms-pi-agendamento.live/users/test/users/register", {
+      const response = await axios.post("https://fms-pi-agendamento.live/users/register", {
         email,
         codes: [
           ...codes.map((code) => {
