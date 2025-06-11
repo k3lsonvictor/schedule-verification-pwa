@@ -128,13 +128,12 @@ function App() {
           })
         ]
       });
-      if (response.status === 200) {
-        alert("Email cadastrado com sucesso!");
-        setEmail("");
-        setCodes([]);
-      } else {
+      if (!response) {
         alert("Erro ao cadastrar email.");
       }
+      alert("Email cadastrado com sucesso!");
+      setEmail("");
+      setCodes([]);
     } catch (error) {
       console.error("Erro ao cadastrar email:", error);
       alert("Erro ao cadastrar email.");
