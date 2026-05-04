@@ -273,6 +273,7 @@ function App() {
                   onClick={() => {
                     setHtmlResult("");
                     setSelectedCode("");
+                    setCodeInput("");
                   }}
                 >
                   Limpar Busca
